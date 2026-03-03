@@ -1,0 +1,35 @@
+{
+  "name": "workspace-info",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Display comprehensive workspace information at a glance",
+  "bin": {
+    "workspace-info": "./index.js",
+    "wsi": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "developer-tools",
+    "cli",
+    "nodejs",
+    "zero-dependencies",
+    "workspace",
+    "project-info",
+    "devtools",
+    "git",
+    "ports",
+    "dependencies"
+  ],
+  "license": "MIT",
+  "author": "NickCirv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NickCirv/workspace-info.git"
+  },
+  "homepage": "https://github.com/NickCirv/workspace-info#readme",
+  "bugs": {
+    "url": "https://github.com/NickCirv/workspace-info/issues"
+  }
+}
