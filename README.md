@@ -1,32 +1,19 @@
-![Banner](banner.svg)
+![workspace-info — your project at a glance: git, deps, ports, env in one command](assets/banner.png)
 
-# workspace-info
+<div align="center">
 
-```
-╭──────────────────────────────────────────────────────────╮
-│  workspace-info · your project at a glance               │
-╰──────────────────────────────────────────────────────────╯
-```
+**One command. Six data sections. Zero dependencies. Your whole workspace, instantly.**
 
-**Your project at a glance — git, deps, ports, files, all in one command.**
+![license](https://img.shields.io/badge/license-MIT-blue?labelColor=0B0A09)
+![dependencies](https://img.shields.io/badge/dependencies-0-brightgreen?labelColor=0B0A09)
+![node](https://img.shields.io/badge/node-%3E%3D18-brightgreen?labelColor=0B0A09)
+![ports](https://img.shields.io/badge/dev%20ports%20scanned-14-8B92F6?labelColor=0B0A09)
 
-Zero npm dependencies. Pure Node.js built-ins. Works anywhere.
-
----
-
-## Quick install
-
-```bash
-# Run instantly with npx (no install needed)
-npx workspace-info
-
-# Or install globally
-npm install -g workspace-info
-```
+</div>
 
 ---
 
-## Output preview
+You open a project you haven't touched in weeks. You need to know: what branch am I on? Is anything staged? Are my dev servers running? What env vars am I missing? `workspace-info` answers all of it in a single command, in under a second.
 
 ```
 ╭─────────────────────────── PROJECT ───────────────────────────╮
@@ -79,67 +66,72 @@ npm install -g workspace-info
   Generated in 412ms · 9:41:22 AM
 ```
 
----
+## Install
 
-## Commands
-
-| Command | What it does |
-|---|---|
-| `workspace-info` | Full workspace report |
-| `workspace-info show` | Same as above (explicit alias) |
-| `workspace-info git` | Git-focused sub-report with recent commits |
-| `workspace-info deps` | Dependency-focused sub-report |
-| `workspace-info ports` | Port availability scan |
-| `workspace-info --json` | Output everything as JSON |
-| `workspace-info --watch` | Refresh every 5 seconds |
-| `workspace-info --help` | Show help |
-
-Both `workspace-info` and `wsi` work as the binary name.
+No npm account needed — runs straight from GitHub with zero dependencies:
 
 ```bash
-wsi                   # shorthand
-wsi --watch           # live refresh
-wsi --json | jq '.git'  # pipe to jq
-wsi ports             # just ports
+npx github:NickCirv/workspace-info
 ```
 
----
+Short alias `wsi` also works once you've run it once:
 
-## Why workspace-info?
+```bash
+# Or install globally for persistent wsi shorthand
+npm install -g github:NickCirv/workspace-info
+```
 
-You open a project you haven't touched in weeks. You need to know: what branch am I on? Is anything staged? Are my dev servers running? What env vars am I missing? You run 6+ commands to find out.
+## Usage
 
-`workspace-info` gives you all of that in one command, in under a second.
+```bash
+# Full workspace report (default)
+npx github:NickCirv/workspace-info
 
-- **Zero dependencies** — no npm install bloat, no supply chain risk
-- **Works anywhere** — any project, any language, any directory
-- **Instant** — parallel data gathering, typically under 500ms
-- **JSON output** — pipe into jq, scripts, or other tools
-- **Watch mode** — live-refresh dashboard for active development
-- **Security first** — env vars show presence only, never values
+# Sub-reports
+npx github:NickCirv/workspace-info git       # git status + recent commits
+npx github:NickCirv/workspace-info deps      # dependency breakdown
+npx github:NickCirv/workspace-info ports     # full port scan
 
----
+# Flags
+npx github:NickCirv/workspace-info --json        # JSON output
+npx github:NickCirv/workspace-info --watch       # refresh every 5 seconds
+npx github:NickCirv/workspace-info --help        # show help
+
+# Pipe JSON to jq
+npx github:NickCirv/workspace-info --json | jq '.git'
+```
+
+| Command / Flag | What it does |
+|---|---|
+| `workspace-info` / `wsi` | Full workspace report (PROJECT, GIT, RUNTIME, DIRECTORY, PORTS, ENV) |
+| `git` | Git-focused sub-report with last 5 commits |
+| `deps` | Dependency breakdown — prod/dev/peer counts, lock file, node_modules status |
+| `ports` | Full scan of 14 common dev ports, shows in-use vs free |
+| `--json` | Output everything as machine-readable JSON |
+| `--watch` / `-w` | Refresh every 5 seconds (live dashboard) |
+| `--help` / `-h` | Show help |
 
 ## What gets scanned
 
 | Section | Data |
 |---|---|
 | Project | name, version, description, license, dep counts, scripts |
-| Git | branch, remote sync, staged/unstaged/untracked, last commit, stash |
+| Git | branch, remote sync, staged/unstaged/untracked, last commit, stash count |
 | Runtime | Node, npm, bun, pnpm, yarn, git versions, platform |
 | Directory | file count, total size, top 5 largest files, 5 most recently modified |
 | Open Ports | 14 common dev ports (3000, 5173, 8080, 4200, 8888, and more) |
 | Environment | NODE_ENV, presence of 20+ common env vars, .env file detection |
 
+Security note: env vars show **presence only** — values are never displayed or logged.
+
+## What it is NOT
+
+- **Not a project manager or task runner.** It reads your workspace state — it does not modify files, run builds, or install packages.
+- **Not language-agnostic for all sections.** Project and Deps sections read `package.json`. Git, Runtime, Directory, and Ports work in any directory.
+- **Not a secrets auditor.** It detects which env vars are set, not whether they're correctly scoped or rotated. For full git-history secret scanning, see [secret-scan](https://github.com/NickCirv/secret-scan).
+
 ---
 
-## Requirements
-
-- Node.js 18+
-- No other dependencies
-
----
-
-## License
-
-MIT
+<div align="center">
+<sub>Zero dependencies · Node 18+ · MIT · by <a href="https://github.com/NickCirv">NickCirv</a></sub>
+</div>
